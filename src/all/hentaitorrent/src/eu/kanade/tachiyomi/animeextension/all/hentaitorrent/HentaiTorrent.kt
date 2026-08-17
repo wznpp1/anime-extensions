@@ -31,7 +31,7 @@ class HentaiTorrent :
 
     override val name = "Hentai Torrent (Torrent)"
 
-    override val baseUrl = "http://192.168.31.127:8080"
+    override val baseUrl = "http://192.168.31.127:8888/-/hentaitorrents"
 
     override val lang = "all"
 
