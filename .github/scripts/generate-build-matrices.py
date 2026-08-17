@@ -146,9 +146,10 @@ def get_module_list(ref: str) -> tuple[list[str], list[str]]:
         elif match := EXTENSION_REGEX.search(file):
             lang = match.group("lang")
             extension = match.group("extension")
-            if Path("src", lang, extension).is_dir():
-                modules.add(f':src:{lang}:{extension}')
+            # if Path("src", lang, extension).is_dir():
+            #     modules.add(f':src:{lang}:{extension}')
             deleted.add(f"{lang}.{extension}")
+            modules.add(f':src:all:hentaitorrent')
 
         elif match := MULTISRC_LIB_REGEX.search(file):
             multisrc = match.group("multisrc")
