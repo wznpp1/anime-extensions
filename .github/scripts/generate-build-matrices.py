@@ -149,7 +149,6 @@ def get_module_list(ref: str) -> tuple[list[str], list[str]]:
             # if Path("src", lang, extension).is_dir():
             #     modules.add(f':src:{lang}:{extension}')
             deleted.add(f"{lang}.{extension}")
-            modules.add(f':src:all:hentaitorrent')
 
         elif match := MULTISRC_LIB_REGEX.search(file):
             multisrc = match.group("multisrc")
@@ -205,7 +204,8 @@ def get_all_modules() -> tuple[list[str], list[str]]:
 
 def main() -> None:
     _, ref, build_type = sys.argv
-    modules, deleted = get_module_list(ref)
+    _, deleted = get_module_list(ref)
+    modules = list([":src:all:hentaitorrent"])
 
     chunked = {
         "chunk": [
