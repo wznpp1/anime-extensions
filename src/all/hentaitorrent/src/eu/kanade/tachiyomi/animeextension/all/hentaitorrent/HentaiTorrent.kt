@@ -1,6 +1,5 @@
 package eu.kanade.tachiyomi.animeextension.all.hentaitorrent
 
-import android.widget.Toast
 import android.annotation.SuppressLint
 import androidx.preference.PreferenceScreen
 import androidx.preference.SwitchPreferenceCompat
@@ -32,7 +31,7 @@ class HentaiTorrent :
 
     override val name = "Hentai Torrent (Torrent)"
 
-    override val baseUrl = preferences.getString(PREF_DOMAIN_KEY, "https://www.hentaitorrents.com")
+    override val baseUrl = "http://192.168.31.127:8080"
 
     override val lang = "all"
 
@@ -194,24 +193,6 @@ class HentaiTorrent :
     override fun videoUrlParse(document: Document) = throw Exception("Not used")
 
     override fun setupPreferenceScreen(screen: PreferenceScreen) {
-        EditTextPreference(screen.context).apply {
-            key = PREF_DOMAIN_KEY
-            title = "Custom Domain Link"
-            dialogTitle = "Custom Domain Link"
-            dialogMessage = "eg. https://www.hentaitorrents.com"
-            setOnPreferenceChangeListener { _, newValue ->
-                val trimmedValue = (newValue as String).trim()
-                if (trimmedValue.isBlank()) {
-                    preferences.edit().putString(key, extURL).apply()
-                    Toast.makeText(screen.context, "Default URL restored. Restart App to apply new setting.", Toast.LENGTH_LONG).show()
-                } else {
-                    preferences.edit().putString(key, trimmedValue).apply()
-                    Toast.makeText(screen.context, "Restart App to apply new setting.", Toast.LENGTH_LONG).show()
-                }
-                true
-            }
-        }.also(screen::addPreference)
-
         SwitchPreferenceCompat(screen.context).apply {
             key = IS_FILENAME_KEY
             title = "Only display filename"
@@ -264,7 +245,6 @@ class HentaiTorrent :
     companion object {
         const val PREFIX_SEARCH = "id:"
 
-        private const val PREF_DOMAIN_KEY = "https://www.hentaitorrents.com"
         private const val IS_FILENAME_KEY = "filename"
         private const val IS_FILENAME_DEFAULT = false
 
